@@ -3,7 +3,7 @@
 use alloy_primitives::{address, b256, Address, B256};
 use foundry_test_utils::{
     casttest,
-    rpc::{next_etherscan_api_key, next_http_rpc_endpoint, next_ws_rpc_endpoint},
+    rpc::{next_http_rpc_endpoint, next_mainnet_etherscan_api_key, next_ws_rpc_endpoint},
     str,
     util::OutputExt,
 };
@@ -822,7 +822,7 @@ casttest!(storage_layout, |_prj, cmd| {
             "--block",
             "110000000",
             "--etherscan-api-key",
-            &next_etherscan_api_key(),
+            "JQNGFHINKS1W7Y5FRXU4SPBYF43J3NYK46",
             "0xB67c152E69217b5aCB85A2e19dF13423351b0E27",
         ])
         .assert_success()
@@ -922,11 +922,14 @@ interface IIntegrationManager {
 // tests that fetches WETH interface from etherscan
 // <https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2>
 casttest!(fetch_weth_interface_from_etherscan, |_prj, cmd| {
-    let weth_address = "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2";
-    let api_key = next_etherscan_api_key();
-    cmd.args(["interface", "--etherscan-api-key", &api_key, weth_address])
-        .assert_success()
-        .stdout_eq(str![[r#"
+    cmd.args([
+        "interface",
+        "--etherscan-api-key",
+        &next_mainnet_etherscan_api_key(),
+        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    ])
+    .assert_success()
+    .stdout_eq(str![[r#"
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.4;
 
