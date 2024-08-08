@@ -244,31 +244,28 @@ async fn can_call_on_pending_block() {
         let block_number = BlockNumberOrTag::Number(anvil_block_number as u64);
         let block = api.block_by_number(block_number).await.unwrap().unwrap();
 
-        let Multicall::getCurrentBlockTimestampReturn { timestamp: ret_timestamp, .. } =
-            contract
-                .getCurrentBlockTimestamp()
-                .block(BlockId::number(anvil_block_number as u64))
-                .call()
-                .await
-                .unwrap();
+        let Multicall::getCurrentBlockTimestampReturn { timestamp: ret_timestamp, .. } = contract
+            .getCurrentBlockTimestamp()
+            .block(BlockId::number(anvil_block_number as u64))
+            .call()
+            .await
+            .unwrap();
         assert_eq!(block.header.timestamp, ret_timestamp.to::<u64>());
 
-        let Multicall::getCurrentBlockGasLimitReturn { gaslimit: ret_gas_limit, .. } =
-            contract
-                .getCurrentBlockGasLimit()
-                .block(BlockId::number(anvil_block_number as u64))
-                .call()
-                .await
-                .unwrap();
+        let Multicall::getCurrentBlockGasLimitReturn { gaslimit: ret_gas_limit, .. } = contract
+            .getCurrentBlockGasLimit()
+            .block(BlockId::number(anvil_block_number as u64))
+            .call()
+            .await
+            .unwrap();
         assert_eq!(block.header.gas_limit, ret_gas_limit.to::<u128>());
 
-        let Multicall::getCurrentBlockCoinbaseReturn { coinbase: ret_coinbase, .. } =
-            contract
-                .getCurrentBlockCoinbase()
-                .block(BlockId::number(anvil_block_number as u64))
-                .call()
-                .await
-                .unwrap();
+        let Multicall::getCurrentBlockCoinbaseReturn { coinbase: ret_coinbase, .. } = contract
+            .getCurrentBlockCoinbase()
+            .block(BlockId::number(anvil_block_number as u64))
+            .call()
+            .await
+            .unwrap();
         assert_eq!(block.header.miner, ret_coinbase);
     }
 }

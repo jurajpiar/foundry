@@ -73,12 +73,10 @@ static ETHERSCAN_MAINNET_KEYS: Lazy<Vec<&'static str>> = Lazy::new(|| {
     keys
 });
 
-/// counts how many times a rpc endpoint was requested for _mainnet_
-static NEXT_RPC_ENDPOINT: AtomicUsize = AtomicUsize::new(0);
-
-// returns the current value of the atomic counter and increments it
+/// Returns the next index to use.
 fn next() -> usize {
-    NEXT_RPC_ENDPOINT.fetch_add(1, Ordering::SeqCst)
+    static NEXT_INDEX: AtomicUsize = AtomicUsize::new(0);
+    NEXT_INDEX.fetch_add(1, Ordering::SeqCst)
 }
 
 fn num_keys() -> usize {

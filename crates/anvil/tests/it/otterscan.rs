@@ -37,13 +37,8 @@ async fn ots_get_internal_operations_contract_deploy() {
     let provider = handle.http_provider();
     let sender = handle.dev_accounts().next().unwrap();
 
-    let contract_receipt = Multicall::deploy_builder(&provider)
-        .send()
-        .await
-        .unwrap()
-        .get_receipt()
-        .await
-        .unwrap();
+    let contract_receipt =
+        Multicall::deploy_builder(&provider).send().await.unwrap().get_receipt().await.unwrap();
 
     let res = api.ots_get_internal_operations(contract_receipt.transaction_hash).await.unwrap();
     assert_eq!(
@@ -501,13 +496,8 @@ async fn ots_get_contract_creator() {
     let provider = handle.http_provider();
     let sender = handle.dev_accounts().next().unwrap();
 
-    let receipt = Multicall::deploy_builder(&provider)
-        .send()
-        .await
-        .unwrap()
-        .get_receipt()
-        .await
-        .unwrap();
+    let receipt =
+        Multicall::deploy_builder(&provider).send().await.unwrap().get_receipt().await.unwrap();
     let contract_address = receipt.contract_address.unwrap();
 
     let creator = api.ots_get_contract_creator(contract_address).await.unwrap().unwrap();

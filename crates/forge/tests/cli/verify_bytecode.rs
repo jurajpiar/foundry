@@ -2,7 +2,7 @@ use foundry_compilers::artifacts::{BytecodeHash, EvmVersion};
 use foundry_config::Config;
 use foundry_test_utils::{
     forgetest_async,
-    rpc::{next_mainnet_etherscan_api_key, next_http_archive_rpc_endpoint},
+    rpc::{next_http_archive_rpc_endpoint, next_mainnet_etherscan_api_key},
     util::OutputExt,
     TestCommand, TestProject,
 };
