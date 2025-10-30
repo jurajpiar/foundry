@@ -195,8 +195,8 @@ alloy-transport-http = { version = "0.2.1", default-features = false }
 alloy-transport-ipc = { version = "0.2.1", default-features = false }
 alloy-transport-ws = { version = "0.2.1", default-features = false }
 
-alloy-dyn-abi = "0.7.7"
-alloy-json-abi = "0.7.7"
+alloy-dyn-abi = "0.8.3"
+alloy-json-abi = "0.8.3"
 alloy-primitives = { version = "0.7.7", features = ["getrandom", "rand"] }
 alloy-sol-macro-expander = "0.7.7"
 alloy-sol-macro-input = "0.7.7"
